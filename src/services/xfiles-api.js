@@ -1,16 +1,18 @@
+import fetch from 'node-fetch';
+
 export const getCharacters = (page) => {
   // eslint-disable-next-line max-len
-  return fetch(`https://xfiles-api.herokuapp.com/api/v1/characters?perPage=20&page=${page}`)
+  return fetch(`https://hey-arnold-api.herokuapp.com/api/v1/characters?perPage=3&page=${page}`)
     .then(res => res.json())
     .then(json => json.results.map(character => ({
       name: character.name,
-      image: character.image,
-      occupation: character.occupation,
+      image: character.image
     })));
 };
 
 export const getCharacterDetails = (name) => {
-  return fetch(`https://xfiles-api.herokuapp.com/api/v1/characters/${name}`)
+  // eslint-disable-next-line max-len
+  return fetch(`https://hey-arnold-api.herokuapp.com/api/v1/characters?name=${name}`)
     .then(res => res.json())
     .then(json => json.map(character => ({
       name: character.name,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getCharacters, getCharacter } from '../services/xfiles-api';
+import { getCharacters, getCharacterDetails } from '../services/xfiles-api';
 
 export const useCharacters = page => {
   const [loading, setLoading] = useState(true);
@@ -9,10 +9,26 @@ export const useCharacters = page => {
     getCharacters(page)
       .then(fetchedCharacters => setCharacters(fetchedCharacters))
       .finally(() => setLoading(false));
-  }, [page]);
+  }, []);
 
   return {
     loading,
     characters
+  };
+};
+
+export const useCharacter = name => {
+  const [loading, setLoading] = useState(true);
+  const [character, setCharacter] = useState(null);
+
+  useEffect(() => {
+    getCharacterDetails(name)
+      .then(fetchedCharacter => setCharacter(fetchedCharacter))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return {
+    loading,
+    character
   };
 };
